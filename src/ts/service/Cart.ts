@@ -12,20 +12,20 @@ export default class Cart {
     }
 
     summ(): number {
-        let price: number = 0;
-        for(let value of this._items){
-             price += value.price;
-        }
-        return price;
+        let initialValue = 0;
+        let summPrice = this._items.reduce(function(previousValue, currentValue){
+            return previousValue + currentValue.price;
+        }, initialValue);
+        return summPrice;
     }
 
     discountSumm(disk: number): number {
-        let summ: number = this.summ();
+        let summ = this.summ();
         return summ - (summ / 100 * disk);
     }
 
     deleteObj(id: number): void{
-        let user: number = this._items.findIndex(item => item.id == id);
+        let user = this._items.findIndex(item => item.id == id);
         this._items.splice(user, 1);
     }
 }
